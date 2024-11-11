@@ -2,7 +2,6 @@ import { RoleProvider } from "../contexts/RoleContext";
 import Image from "next/image";
 import DashboardHeader from "./components/DashboardHeader";
 import Sidebar from "./components/DashboardSidebar";
-// import HomeDashboard from "./components/HomeDashboard";
 import MainDashboard from "./components/MainDashboard";
 import { PageProvider } from "../contexts/PageContext";
 
@@ -31,7 +30,6 @@ export default function Page() {
           <DashboardHeader />
           <Sidebar />
           <div className="bg-background py-6 pl-8 pr-10">
-            {/* <HomeDashboard /> */}
             <MainDashboard />
           </div>
         </div>

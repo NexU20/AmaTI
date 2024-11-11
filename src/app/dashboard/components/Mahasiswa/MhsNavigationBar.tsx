@@ -8,28 +8,36 @@ import { useState } from "react";
 
 export default function MahasiswaNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { setPage } = usePage();
+  const { page, setPage } = usePage();
+  const isHome = page == "mhs-home" || page == null;
 
   return (
     <>
       <button
         onClick={() => setPage("mhs-home")}
-        className="bg-white text-black poppins-semibold w-full py-2 rounded-lg hover:bg-neutral-100 flex items-center justify-start gap-x-4 px-4"
+        className={`bg-white text-black poppins-semibold w-full py-2 rounded-lg hover:bg-neutral-100 flex items-center justify-start gap-x-4 px-4 ${
+          !isHome &&
+          "!bg-transparent !text-slate-300 hover:!bg-opacity-20 hover:!bg-neutral-100"
+        }`}
       >
-        <Home />
+        <Home color={!isHome ? "#BEBEBE" : "#000"} />
         Beranda
       </button>
       <div className="">
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="text-slate-300 poppins-semibold w-full py-2 rounded-lg hover:bg-neutral-100 hover:bg-opacity-20 flex items-center justify-between px-4"
+          className={`${
+            !isHome && "bg-white !text-black hover:!bg-neutral-100"
+          } text-slate-300 poppins-semibold w-full py-2 rounded-lg hover:bg-neutral-100 hover:bg-opacity-20 flex items-center justify-between px-4`}
         >
           <div className="flex gap-x-4 items-center">
-            <Upload />
+            <Upload color={!isHome ? "#000" : "#BEBEBE"} />
             <span>Unggah</span>
           </div>
           <div
-            className={`inline size-2 border-b border-l rotate-45 transition-transform ${
+            className={`${
+              !isHome ? "border-black" : ""
+            } inline size-2 border-b border-l rotate-45 transition-transform ${
               isMenuOpen && "!-rotate-45"
             }`}
           ></div>

@@ -21,8 +21,11 @@ export default function IsiKRS() {
                 <span>KHS-sms-1.pdf</span>
               </button>
             </td>
-            <td className="border py-2">
-              <button className="">Upload</button>
+            <td className="border py-2 text-white">
+              <button className="mx-1 bg-green-400 size-7">a</button>
+              <button className="mx-1 bg-yellow-600 size-7">a</button>
+              <button className="mx-1 bg-sky-400 size-7">a</button>
+              <button className="mx-1 bg-red-500 size-7">a</button>
             </td>
           </tr>
           <tr>
@@ -31,8 +34,11 @@ export default function IsiKRS() {
             <td className="border py-2 box-content">
               <span className="text-red-600">Belum menambahkan data</span>
             </td>
-            <td className="border py-2">
-              <button className="">Upload</button>
+            <td className="border py-2 text-white">
+              <button className="mx-1 bg-green-400 size-7">a</button>
+              <button className="mx-1 bg-yellow-600 size-7">a</button>
+              <button className="mx-1 bg-sky-400 size-7">a</button>
+              <button className="mx-1 bg-red-500 size-7">a</button>
             </td>
           </tr>
         </tbody>

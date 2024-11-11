@@ -4,7 +4,7 @@ import Link from "next/link";
 import LoginInput from "./LoginInput";
 import Image from "next/image";
 import { useState } from "react";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 
 export default function LoginForm() {
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -39,7 +39,7 @@ export default function LoginForm() {
       </div>
       <button
         type="button"
-        onClick={() => redirect("/dashboard")}
+        onClick={() => redirect("/dashboard", RedirectType.push)}
         className="bg-sky-500 text-sm sm:text-base self-center poppins-semibold text-white rounded-md px-10 py-3 sm:px-12 hover:bg-sky-600 mt-2 flex gap-x-2 items-center justify-center w-fit"
       >
         <Image src="/login.png" width={24} height={24} alt="login" />

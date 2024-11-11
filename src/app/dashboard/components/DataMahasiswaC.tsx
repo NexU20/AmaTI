@@ -3,7 +3,7 @@ import Plus from "@/app/components/icons/Plus";
 export default function DataMahasiswaC() {
   return (
     <div className="flex flex-col gap-y-6">
-      <div className="pl-6 pr-4 flex justify-between">
+      <div className="pl-6 pr-4 flex justify-between gap-x-4">
         <div className="flex gap-x-12">
           <div className="flex gap-x-2 items-center">
             <label htmlFor="search" className="text-sm">
@@ -12,7 +12,7 @@ export default function DataMahasiswaC() {
             <input
               type="text"
               id="search"
-              className="border-2 border-black text-sm outline-none px-2 max-w-64 focus:border-sidebar"
+              className="border-2 border-black text-sm outline-none px-2 min-w-40 lg:w-2/3 xl:w-64 focus:border-sidebar"
             />
           </div>
           <div className="flex gap-x-2 items-center">

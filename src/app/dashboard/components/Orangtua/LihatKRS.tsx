@@ -1,8 +1,8 @@
 import DashboardCard from "../DashboardCard";
 
-export default function IsiKRS() {
+export default function LihatKRS() {
   return (
-    <DashboardCard title="Transkrip Nilai">
+    <DashboardCard title="Kartu Rencana Studi">
       <table>
         <thead className="text-sm">
           <tr>
@@ -18,27 +18,23 @@ export default function IsiKRS() {
             <td className="border py-2">1</td>
             <td className="border py-2 box-content">
               <button className="text-xs bg-red-600 px-4 py-1 rounded-md w-fit text-white">
-                <span>Nilai-sms-1.pdf</span>
+                <span>KRS-sms-1.pdf</span>
               </button>
             </td>
             <td className="border py-2 text-white">
               <button className="mx-1 bg-green-400 size-7">a</button>
               <button className="mx-1 bg-yellow-600 size-7">a</button>
-              <button className="mx-1 bg-sky-400 size-7">a</button>
-              <button className="mx-1 bg-red-500 size-7">a</button>
             </td>
           </tr>
           <tr>
             <td className="border py-2">2.</td>
             <td className="border py-2">2</td>
             <td className="border py-2 box-content">
-              <span className="text-red-600">Belum menambahkan data</span>
+              <span className="text-red-600">Tidak ada berkas</span>
             </td>
             <td className="border py-2 text-white">
               <button className="mx-1 bg-green-400 size-7">a</button>
               <button className="mx-1 bg-yellow-600 size-7">a</button>
-              <button className="mx-1 bg-sky-400 size-7">a</button>
-              <button className="mx-1 bg-red-500 size-7">a</button>
             </td>
           </tr>
         </tbody>
