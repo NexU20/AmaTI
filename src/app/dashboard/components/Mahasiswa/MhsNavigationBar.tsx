@@ -15,22 +15,35 @@ export default function MahasiswaNavigation() {
     <>
       <button
         onClick={() => setPage("mhs-home")}
-        className={`bg-white text-black poppins-semibold w-full py-2 rounded-lg hover:bg-neutral-100 flex items-center justify-start gap-x-4 px-4 ${
-          !isHome &&
-          "!bg-transparent !text-slate-300 hover:!bg-opacity-20 hover:!bg-neutral-100"
+        className={`text-black poppins-semibold w-full py-2 rounded-lg relative group px-4 overflow-hidden transition-colors ${
+          !isHome && "!text-slate-300"
         }`}
       >
-        <Home color={!isHome ? "#BEBEBE" : "#000"} />
-        Beranda
+        <div
+          className={`bg-white group-hover:bg-neutral-100 absolute top-0 left-0 h-full w-full transition-transform ${
+            !isHome &&
+            "group-hover:!bg-opacity-20 group-hover:!bg-neutral-100 translate-y-full"
+          }`}
+        ></div>
+        <div className="flex items-center justify-start gap-x-4 relative">
+          <Home color={!isHome ? "#BEBEBE" : "#000"} />
+          Beranda
+        </div>
       </button>
       <div className="">
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className={`${
             !isHome && "bg-white !text-black hover:!bg-neutral-100"
-          } text-slate-300 poppins-semibold w-full py-2 rounded-lg hover:bg-neutral-100 hover:bg-opacity-20 flex items-center justify-between px-4`}
+          } text-slate-300 poppins-semibold w-full py-2 rounded-lg hover:bg-neutral-100 hover:bg-opacity-20 flex items-center transition-colors justify-between px-4 relative overflow-hidden`}
         >
-          <div className="flex gap-x-4 items-center">
+          <div
+            className={`bg-white group-hover:bg-neutral-100 absolute top-0 left-0 h-full w-full transition-transform ${
+              isHome &&
+              "group-hover:!bg-opacity-20 group-hover:!bg-neutral-100 -translate-y-full"
+            }`}
+          ></div>
+          <div className="flex gap-x-4 items-center relative">
             <Upload color={!isHome ? "#000" : "#BEBEBE"} />
             <span>Unggah</span>
           </div>
