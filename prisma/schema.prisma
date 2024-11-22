@@ -1,0 +1,88 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  user
+  prodi
+}
+
+enum JenisDokumen {
+  krs_sms1
+  krs_sms2
+  krs_sms3
+  krs_sms4
+  krs_sms5
+  krs_sms6
+  krs_sms7
+  krs_sms8
+  krs_sms9
+  krs_sms10
+  krs_sms11
+  krs_sms12
+  krs_sms13
+  krs_sms14
+  khs
+  transkrip_sms1
+  transkrip_sms2
+  transkrip_sms3
+  transkrip_sms4
+  transkrip_sms5
+  transkrip_sms6
+  transkrip_sms7
+  transkrip_sms8
+  transkrip_sms9
+  transkrip_sms10
+  transkrip_sms11
+  transkrip_sms12
+  transkrip_sms13
+  transkrip_sms14
+}
+
+model User {
+  user_id  Int      @id @default(autoincrement())
+  username String   @unique
+  password String
+  role     UserRole
+  Student  Student?
+  Admin    Admin?
+}
+
+model Student {
+  mahasiswa_id Int        @id @default(autoincrement())
+  user_id      Int        @unique
+  nama         String
+  nim          String     @unique
+  ttl          String
+  angkatan     String
+  ayah_wali    String
+  ibu          String
+  no_ayah      String
+  no_ibu       String
+  alamat       String
+  user         User       @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+  documents    Document[]
+}
+
+model Document {
+  dokumen_id   Int     @id @default(autoincrement())
+  mahasiswa_id Int
+  jenis        String
+  file         String
+  display_name String
+  student      Student @relation(fields: [mahasiswa_id], references: [mahasiswa_id], onDelete: Cascade)
+}
+
+model Admin {
+  admin_id Int    @id @default(autoincrement())
+  user_id  Int    @unique
+  nama     String
+  user     User   @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+}

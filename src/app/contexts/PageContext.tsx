@@ -4,7 +4,7 @@ import { createContext, ReactNode, useContext, useState } from "react";
 
 type PageContextType = {
   page: string | null;
-  setPage: (role: string | null) => void;
+  setPage: (page: string | null) => void;
 };
 
 const PageContext = createContext<PageContextType>({

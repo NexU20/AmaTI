@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `student` ADD COLUMN `angkatan` VARCHAR(191) NOT NULL DEFAULT '2023';

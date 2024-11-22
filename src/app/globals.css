@@ -22,6 +22,10 @@
   .dashboard-navigation-btn {
     @apply bg-dashboardMainButton hover:scale-95 transition-transform text-white poppins-semibold size-36 box-content py-4 px-8 flex flex-col gap-y-2 items-center justify-center rounded-lg;
   }
+
+  .main-btn {
+    @apply bg-sky-600 py-3 px-4 text-sm md:text-base text-white rounded-md hover:bg-sky-700;
+  }
 }
 
 * {
