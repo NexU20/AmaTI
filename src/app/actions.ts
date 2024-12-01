@@ -107,7 +107,7 @@ function generateToken(
 
   const secret = process.env.SECRET_TOKEN;
 
-  const token = jwt.sign(payload, secret ?? "secretajah", { expiresIn: "1h" }); // Token berlaku selama 1 jam
+  const token = jwt.sign(payload, secret ?? "secretajah", { expiresIn: "1w" }); // Token berlaku selama 1 minggu
   return token;
 }
 

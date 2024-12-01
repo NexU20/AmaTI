@@ -14,7 +14,7 @@ export default function SeeDocument({
   return (
     <a
       target="_blank"
-      href={!disabled && file ? `/uploads/${file}` : undefined}
+      href={!disabled && file ? `/api/pdf?file=${file}` : undefined}
       className={`${
         disabled
           ? "bg-opacity-30 cursor-not-allowed"

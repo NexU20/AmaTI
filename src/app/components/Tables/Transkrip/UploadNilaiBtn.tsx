@@ -1,10 +1,10 @@
 "use client";
 import { ChangeEvent } from "react";
-import Edit from "../../icons/Edit";
 import { v4 as uuidv4 } from "uuid";
 import { uploadNilai } from "@/app/query";
 import { saveFile } from "@/app/helper";
 import { useToast } from "@/app/contexts/ToastContext";
+import Upload from "../../icons/Upload";
 
 export default function UploadNilaiBtn({
   disabled,
@@ -94,7 +94,7 @@ export default function UploadNilaiBtn({
             : "hover:bg-green-500 cursor-pointer"
         } mx-1 bg-green-400 inline-flex justify-center items-center size-8 rounded-sm`}
       >
-        <Edit />
+        <Upload />
       </label>
     </>
   );

@@ -1,6 +1,7 @@
 "use client";
 import Home from "@/app/components/icons/Home";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLayoutEffect, useState } from "react";
 
 function activateStyle(current: string, target: string) {
@@ -10,11 +11,12 @@ function activateStyle(current: string, target: string) {
 }
 
 export default function Navigation() {
-  const [current, setCurrent] = useState("");
+  const pathName = usePathname();
+  const [current, setCurrent] = useState(pathName);
 
   useLayoutEffect(() => {
-    setCurrent(window.location.pathname);
-  }, []);
+    setCurrent(pathName);
+  }, [pathName]);
 
   return (
     <nav className="px-4 py-6 flex flex-col gap-y-4">

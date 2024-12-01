@@ -1,6 +1,17 @@
+import { getToken } from "@/app/actions";
 import DashboardCard from "@/app/components/DashboardCard";
+import { getStudent } from "@/app/query";
+import { redirect } from "next/navigation";
 
-export default function PengaturanAkun() {
+export default async function PengaturanAkun() {
+  const token = await getToken();
+
+  if (!token) {
+    redirect("/");
+  }
+
+  const data = await getStudent(token.nim);
+
   return (
     <DashboardCard title="Pengaturan Profil">
       <div className="h-96 flex">
@@ -10,35 +21,35 @@ export default function PengaturanAkun() {
         >
           <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">Nama Mahasiswa</span>
-            <span>Lalu Fathan</span>
+            <span>{data?.nama || "-"}</span>
           </div>
           <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">NIM Mahasiswa</span>
-            <span>11230910000007</span>
+            <span>{data?.nim || "-"}</span>
           </div>
           <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">TTL Mahasiswa</span>
-            <span>Mataram, 1 Mei 2005</span>
+            <span>{data?.ttl || "-"}</span>
           </div>
           <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">Nama Ayah/Wali</span>
-            <span>-</span>
+            <span>{data?.ayah_wali || "-"}</span>
           </div>
           <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">Nama Ibu</span>
-            <span>-</span>
+            <span>{data?.ibu || "-"}</span>
           </div>
           <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">No. Telp/WA Ayah/Wali</span>
-            <span>-</span>
+            <span>{data?.no_ayah || "-"}</span>
           </div>
           <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">No. Telp/WA Ibu</span>
-            <span>-</span>
+            <span>{data?.no_ibu || "-"}</span>
           </div>
           <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">Alamat Rumah</span>
-            <span>-</span>
+            <span>{data?.alamat || "-"}</span>
           </div>
         </section>
         <section id="info" className="w-fit flex justify-end items-start">

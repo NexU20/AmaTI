@@ -1,16 +1,16 @@
-import { getTranskrip, getYear } from "@/app/query";
+import { getKRS, getYear } from "@/app/query";
 import { getToken } from "@/app/actions";
 import { getCurrentSemester } from "@/app/utils";
 import Edit from "../../icons/Edit";
 import { getRole } from "@/app/helper";
 import SeeKhsBtn from "../SeeDocument";
 import DeleteFile from "../DeleteFile";
-import UploadNilaiBtn from "./UploadNilaiBtn";
 import Eye from "../../icons/Eye";
+import KrsUploadBtn from "./KrsUploadBtn";
 
-export default async function RowNilai({ nim }: { nim?: string }) {
+export default async function TableKRS({ nim }: { nim?: string }) {
   const token = await getToken();
-  const datas = await getTranskrip(nim ?? token.nim);
+  const datas = await getKRS(nim ?? token.nim);
 
   const role = await getRole();
   const isAuthorized = role === "mhs" || role === "prodi";
@@ -27,14 +27,14 @@ export default async function RowNilai({ nim }: { nim?: string }) {
             <td className="border py-2">{j + 1}.</td>
             <td className="border py-2">{j + 1}</td>
             <td className="border py-2 box-content">
-              {datas?.[`nilai_sms${j + 1}`] ? (
+              {datas?.[`krs_sms${j + 1}`] ? (
                 <button className="text-xs bg-red-600 px-4 py-1 rounded-md w-fit text-white">
                   <a
                     target="_blank"
-                    href={`/api/pdf?file=${datas[`nilai_sms${j + 1}`].file}`}
+                    href={`/api/pdf?file=${datas[`krs_sms${j + 1}`].file}`}
                   >
-                    {datas[`nilai_sms${j + 1}`] &&
-                      datas[`nilai_sms${j + 1}`].display_name}
+                    {datas[`krs_sms${j + 1}`] &&
+                      datas[`krs_sms${j + 1}`].display_name}
                   </a>
                 </button>
               ) : (
@@ -44,34 +44,34 @@ export default async function RowNilai({ nim }: { nim?: string }) {
             <td className="border py-2 text-white">
               {isAuthorized ? (
                 <>
-                  <UploadNilaiBtn
-                    nilai={`nilai_${j + 1}`}
+                  <KrsUploadBtn
+                    khs={`krs_${j + 1}`}
                     nim={nim ?? token.nim}
                     semester={j + 1}
-                    disabled={datas?.[`nilai_sms${j + 1}`] ? true : false}
+                    disabled={datas?.[`krs_sms${j + 1}`] ? true : false}
                   />
                   <SeeKhsBtn
-                    disabled={datas?.[`nilai_sms${j + 1}`] ? false : true}
-                    file={datas?.[`nilai_sms${j + 1}`]?.file}
+                    disabled={datas?.[`krs_sms${j + 1}`] ? false : true}
+                    file={datas?.[`krs_sms${j + 1}`]?.file}
                   >
                     <Eye />
                   </SeeKhsBtn>
                   <button
-                    disabled={datas?.[`nilai_sms${j + 1}`] ? false : true}
+                    disabled={datas?.[`krs_sms${j + 1}`] ? false : true}
                     className="mx-1 bg-sky-400 inline-flex justify-center items-center size-8 rounded-sm disabled:opacity-30"
                   >
                     <Edit />
                   </button>
                   <DeleteFile
-                    name={datas?.[`nilai_sms${j + 1}`]?.file}
-                    id={datas?.[`nilai_sms${j + 1}`]?.dokumen_id}
-                    disabled={datas?.[`nilai_sms${j + 1}`] ? false : true}
+                    name={datas?.[`krs_sms${j + 1}`]?.file}
+                    id={datas?.[`krs_sms${j + 1}`]?.dokumen_id}
+                    disabled={datas?.[`krs_sms${j + 1}`] ? false : true}
                   />
                 </>
               ) : (
                 <SeeKhsBtn
-                  disabled={datas?.[`nilai_sms${j + 1}`] ? false : true}
-                  file={datas?.[`nilai_sms${j + 1}`]?.file}
+                  disabled={datas?.[`krs_sms${j + 1}`] ? false : true}
+                  file={datas?.[`krs_sms${j + 1}`]?.file}
                   className="py-2 px-8 !rounded-md"
                 >
                   Lihat

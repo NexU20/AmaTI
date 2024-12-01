@@ -6,15 +6,16 @@ import { getRole } from "@/app/helper";
 import KhsUploadBtn from "./KhsUploadBtn";
 import SeeKhsBtn from "../SeeDocument";
 import DeleteFile from "../DeleteFile";
+import Eye from "../../icons/Eye";
 
-export default async function TableKHS() {
+export default async function TableKHS({ nim }: { nim?: string }) {
   const token = await getToken();
-  const datas = await getKHS(token.nim);
+  const datas = await getKHS(nim ?? token.nim);
 
   const role = await getRole();
   const isAuthorized = role === "mhs" || role === "prodi";
 
-  const year = await getYear(token.nim);
+  const year = await getYear(nim ?? token.nim);
   const angkatan = Number(year);
   const semester = getCurrentSemester(angkatan);
 
@@ -30,7 +31,7 @@ export default async function TableKHS() {
                 <button className="text-xs bg-red-600 px-4 py-1 rounded-md w-fit text-white">
                   <a
                     target="_blank"
-                    href={`/uploads/${datas[`khs_sms${j + 1}`].file}`}
+                    href={`/api/pdf?file=${datas[`khs_sms${j + 1}`].file}`}
                   >
                     {datas[`khs_sms${j + 1}`] &&
                       datas[`khs_sms${j + 1}`].display_name}
@@ -45,7 +46,7 @@ export default async function TableKHS() {
                 <>
                   <KhsUploadBtn
                     khs={`krs_${j + 1}`}
-                    nim={token.nim}
+                    nim={nim ?? token.nim}
                     semester={j + 1}
                     disabled={datas?.[`khs_sms${j + 1}`] ? true : false}
                   />
@@ -53,7 +54,7 @@ export default async function TableKHS() {
                     disabled={datas?.[`khs_sms${j + 1}`] ? false : true}
                     file={datas?.[`khs_sms${j + 1}`]?.file}
                   >
-                    <Edit />
+                    <Eye />
                   </SeeKhsBtn>
                   <button
                     disabled={datas?.[`khs_sms${j + 1}`] ? false : true}
@@ -62,6 +63,7 @@ export default async function TableKHS() {
                     <Edit />
                   </button>
                   <DeleteFile
+                    name={datas?.[`khs_sms${j + 1}`]?.file}
                     id={datas?.[`khs_sms${j + 1}`]?.dokumen_id}
                     disabled={datas?.[`khs_sms${j + 1}`] ? false : true}
                   />

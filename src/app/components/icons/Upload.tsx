@@ -1,5 +1,5 @@
 const SvgIcon: React.FC<React.SVGProps<SVGElement>> = (props) => {
-  const color = props.color || "#000";
+  const color = props.color || "#fff";
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -34,3 +34,26 @@ export async function verifyToken(token: string) {
 
   return jwt.verify(token, secret);
 }
+
+export function getTahunAjaran() {
+  const sekarang = new Date();
+  const tahunSekarang = sekarang.getFullYear();
+  const bulanSekarang = sekarang.getMonth() + 1; // bulan dimulai dari 0, jadi ditambah 1
+
+  let tahunAjaranSekarang: string;
+  let tahunAjaranDepan: string;
+
+  // Asumsi tahun ajaran dimulai pada bulan Juli (07)
+  if (bulanSekarang >= 7) {
+    tahunAjaranSekarang = `${tahunSekarang}/${tahunSekarang + 1}`;
+    tahunAjaranDepan = `${tahunSekarang + 1}/${tahunSekarang + 2}`;
+  } else {
+    tahunAjaranSekarang = `${tahunSekarang - 1}/${tahunSekarang}`;
+    tahunAjaranDepan = `${tahunSekarang}/${tahunSekarang + 1}`;
+  }
+
+  return {
+    current: tahunAjaranSekarang,
+    next: tahunAjaranDepan,
+  };
+}

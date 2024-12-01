@@ -1,12 +1,12 @@
 "use client";
 import { ChangeEvent } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { uploadKHS } from "@/app/query";
+import { uploadKRS } from "@/app/query";
 import { saveFile } from "@/app/helper";
 import { useToast } from "@/app/contexts/ToastContext";
 import Upload from "../../icons/Upload";
 
-export default function KhsUploadBtn({
+export default function KrsUploadBtn({
   disabled,
   khs,
   nim,
@@ -19,7 +19,7 @@ export default function KhsUploadBtn({
 }) {
   const { addToast } = useToast();
 
-  async function uploadKHSAction(e: ChangeEvent<HTMLInputElement>) {
+  async function uploadKRSAction(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
 
     if (!file) {
@@ -54,7 +54,7 @@ export default function KhsUploadBtn({
       return;
     }
 
-    const res = await uploadKHS(
+    const res = await uploadKRS(
       nim,
       semester.toString(),
       displayName,
@@ -83,7 +83,7 @@ export default function KhsUploadBtn({
           name="krs"
           id={khs}
           className="hidden"
-          onChange={uploadKHSAction}
+          onChange={uploadKRSAction}
         />
       )}
       <label

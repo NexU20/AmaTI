@@ -72,12 +72,12 @@ model Student {
 }
 
 model Document {
-  dokumen_id   Int     @id @default(autoincrement())
-  mahasiswa_id Int
+  dokumen_id   Int      @id @default(autoincrement())
+  mahasiswa_id Int?
   jenis        String
   file         String
   display_name String
-  student      Student @relation(fields: [mahasiswa_id], references: [mahasiswa_id], onDelete: Cascade)
+  student      Student? @relation(fields: [mahasiswa_id], references: [mahasiswa_id], onDelete: Cascade)
 }
 
 model Admin {

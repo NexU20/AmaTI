@@ -1,5 +1,7 @@
 import DashboardCard from "@/app/components/DashboardCard";
-import TableData from "./TableData";
+import DataLoading from "@/app/components/Tables/Loading";
+import TableKRS from "@/app/components/Tables/KRS/TableKRS";
+import { Suspense } from "react";
 
 export default function page() {
   return (
@@ -10,11 +12,13 @@ export default function page() {
             <th className="border-r py-2 px-1">No</th>
             <th className="border-r py-2 px-2">Semester</th>
             <th className="border-r py-2 px-3">Berkas</th>
-            <th className="py-2 px-12">Aksi</th>
+            <th className="border py-2 px-12">Aksi</th>
           </tr>
         </thead>
         <tbody className="text-center text-sm">
-          <TableData />
+          <Suspense fallback={<DataLoading />}>
+            <TableKRS />
+          </Suspense>
         </tbody>
       </table>
     </DashboardCard>

@@ -1,23 +1,29 @@
 "use client";
 import { deleteFile } from "@/app/query";
+import { deleteFile as deleteLocalFile } from "@/app/helper";
 import Trash from "../icons/Trash";
+import { useToast } from "@/app/contexts/ToastContext";
 
 export default function DeleteFile({
   id,
+  name,
   disabled,
 }: {
   id?: number;
+  name?: string;
   disabled: boolean;
 }) {
+  const { addToast } = useToast();
   async function deleteAction() {
-    if (!id) {
+    if (!id || !name) {
       return;
     }
 
     const res = await deleteFile(id);
+    deleteLocalFile(name);
 
     if (!res) {
-      alert("Gagal Menghapus File");
+      addToast({ message: "Gagal untuk menghapus file", type: "error" });
       return;
     }
   }

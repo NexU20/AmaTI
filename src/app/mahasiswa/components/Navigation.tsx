@@ -2,15 +2,17 @@
 import Home from "@/app/components/icons/Home";
 import Upload from "@/app/components/icons/Upload";
 import Link from "next/link";
-import React, { useLayoutEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useLayoutEffect, useState } from "react";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentTab, setCurrentTab] = useState("");
+  const pathName = usePathname();
+  const [currentTab, setCurrentTab] = useState(pathName);
 
   useLayoutEffect(() => {
-    setCurrentTab(window.location.pathname);
-  }, []);
+    setCurrentTab(pathName);
+  }, [pathName]);
 
   return (
     <div className="p-4 flex flex-col gap-y-4">

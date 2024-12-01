@@ -2,6 +2,8 @@
 
 import { Document, PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { v4 as uuidv4 } from "uuid";
+import { saveFile } from "./helper";
 
 const prisma = new PrismaClient();
 
@@ -36,6 +38,9 @@ export async function uploadKRS(
         data: null,
       };
     }
+
+    revalidatePath("/mahasiswa/krs");
+    revalidatePath("/prodi/*");
 
     return {
       status: 200,
@@ -149,6 +154,81 @@ export async function uploadNilai(
   }
 }
 
+export async function uploadKalender(tahun: string, file: File | null) {
+  if (!file) {
+    return {
+      status: 400,
+      message: "Pilih file terlebih dahulu",
+      data: null,
+    };
+  }
+
+  const display_name = file.name;
+  const size = file.size;
+  const type = file.type.split("/")[1];
+  const fileName = uuidv4() + "." + type;
+
+  const sizeLimit = 1; // 1MB
+  const sizeInMB = size / 1024 / 1024;
+
+  if (sizeInMB >= sizeLimit) {
+    return {
+      status: 400,
+      message: "Ukuran file terlalu besar",
+      data: null,
+    };
+  }
+
+  if (type !== "pdf") {
+    return {
+      status: 400,
+      message: "File harus berformat PDF",
+      data: null,
+    };
+  }
+
+  try {
+    const res = await prisma.document.create({
+      data: {
+        display_name,
+        file: fileName,
+        jenis: `kalender_${tahun}`,
+      },
+      select: { display_name: true, jenis: true },
+    });
+
+    if (!res) {
+      return {
+        status: 500,
+        message: "Gagal mengunggah kalender",
+        data: null,
+      };
+    }
+
+    const fileData = await file.arrayBuffer();
+    const data = new Uint8Array(fileData);
+    saveFile(fileName, data);
+
+    revalidatePath("/prodi/kalender");
+
+    return {
+      status: 200,
+      message: "Berhasil mengunggah kalender",
+      data: res,
+    };
+  } catch (error) {
+    console.log(error);
+
+    return {
+      status: 500,
+      message: "Kesalahan pada server",
+      data: null,
+    };
+  } finally {
+    prisma.$disconnect();
+  }
+}
+
 export async function getYear(nim: string) {
   try {
     const student = await prisma.student.findFirst({
@@ -232,6 +312,24 @@ export async function getTranskrip(nim: string) {
     return transkrip;
   } catch (err) {
     console.error(err);
+    return null;
+  } finally {
+    prisma.$disconnect();
+  }
+}
+
+export async function getCalendar() {
+  try {
+    const data = await prisma.document.findMany({
+      where: {
+        jenis: { startsWith: "kalender_" },
+      },
+      orderBy: { jenis: "asc" },
+    });
+
+    return data;
+  } catch (error) {
+    console.error(error);
     return null;
   } finally {
     prisma.$disconnect();
@@ -372,6 +470,20 @@ export async function loginQuery(username: string, password: string) {
     });
 
     return user;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    prisma.$disconnect();
+  }
+}
+
+export async function getStudent(nim: string) {
+  try {
+    const student = await prisma.student.findFirst({
+      where: { nim },
+    });
+
+    return student;
   } catch (error) {
     console.error(error);
   } finally {

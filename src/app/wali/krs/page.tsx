@@ -1,7 +1,7 @@
 import DashboardCard from "@/app/components/DashboardCard";
 import { Suspense } from "react";
-import TableBody from "./TableBody";
 import DataLoading from "@/app/components/Tables/Loading";
+import TableKRS from "@/app/components/Tables/KRS/TableKRS";
 
 export default function LihatKRS() {
   return (
@@ -17,7 +17,7 @@ export default function LihatKRS() {
         </thead>
         <tbody className="text-center text-sm">
           <Suspense fallback={<DataLoading />}>
-            <TableBody />
+            <TableKRS />
           </Suspense>
         </tbody>
       </table>

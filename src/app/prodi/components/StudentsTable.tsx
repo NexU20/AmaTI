@@ -3,6 +3,7 @@ import Table from "../Table/Table";
 import THead from "../Table/THead";
 import { getAllStudents } from "@/app/query";
 import DeleteButton from "./DeleteButton";
+import NavigateActionButton from "./NavigateActionButton";
 
 export default async function StudentsTable() {
   const students = await getAllStudents();
@@ -53,15 +54,27 @@ export default async function StudentsTable() {
                   {student.ttl}
                 </td>
                 <td className="py-2 text-center px-3 overflow-x-hidden overflow-ellipsis flex justify-center flex-wrap gap-x-3 gap-y-2">
-                  <button className="py-2 px-3 poppins-semibold text-white text-xs bg-green-400 hover:bg-green-500">
+                  <NavigateActionButton
+                    nim={student.nim}
+                    action="krs"
+                    className="bg-green-500 hover:bg-green-600"
+                  >
                     KRS
-                  </button>
-                  <button className="py-2 px-3 poppins-semibold text-white text-xs bg-pink-500 hover:bg-pink-600">
+                  </NavigateActionButton>
+                  <NavigateActionButton
+                    nim={student.nim}
+                    action="nilai"
+                    className="bg-pink-500 hover:bg-pink-600"
+                  >
                     Transkrip
-                  </button>
-                  <button className="py-2 px-3 poppins-semibold text-white text-xs bg-yellow-500 hover:bg-yellow-600">
+                  </NavigateActionButton>
+                  <NavigateActionButton
+                    nim={student.nim}
+                    action="khs"
+                    className="bg-yellow-500 hover:bg-yellow-600"
+                  >
                     KHS
-                  </button>
+                  </NavigateActionButton>
                   <button className="p-2 bg-blue-500 hover:bg-blue-600">
                     <Edit />
                   </button>
