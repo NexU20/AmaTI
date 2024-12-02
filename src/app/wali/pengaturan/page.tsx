@@ -2,6 +2,7 @@ import { getToken } from "@/app/actions";
 import DashboardCard from "@/app/components/DashboardCard";
 import { getStudent } from "@/app/query";
 import { redirect } from "next/navigation";
+import Edit from "./components/Edit";
 
 export default async function PengaturanAkun() {
   const token = await getToken();
@@ -52,11 +53,12 @@ export default async function PengaturanAkun() {
             <span>{data?.alamat || "-"}</span>
           </div>
         </section>
-        <section id="info" className="w-fit flex justify-end items-start">
+        <section id="info" className="w-fit flex flex-col gap-y-4">
           <div className="flex flex-col bg-blue-400 gap-y-3 w-fit py-4 px-8 text-white rounded-md">
             <span>Mohon isi dan lengkapi data wali</span>
             <span>Klik ini untuk mengedit teks</span>
           </div>
+          <Edit nim={data?.nim} />
         </section>
       </div>
     </DashboardCard>

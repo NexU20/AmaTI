@@ -490,3 +490,50 @@ export async function getStudent(nim: string) {
     prisma.$disconnect();
   }
 }
+
+export async function updateData(
+  nim: string,
+  ayah: string,
+  ibu: string,
+  telpAyah: string,
+  telpIbu: string,
+  alamat: string
+) {
+  try {
+    const data = await prisma.student.update({
+      data: {
+        ayah_wali: ayah,
+        ibu,
+        no_ayah: telpAyah,
+        no_ibu: telpIbu,
+        alamat,
+      },
+      where: { nim: nim },
+    });
+
+    if (!data) {
+      return {
+        status: 400,
+        msg: "Gagal mengubah data",
+        data: null,
+      };
+    }
+
+    revalidatePath("/wali/pengaturan");
+
+    return {
+      status: 200,
+      msg: "Berhasil mengubah data",
+      data: null,
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      status: 500,
+      msg: "Terdapat kesalahan",
+      data: null,
+    };
+  } finally {
+    prisma.$disconnect();
+  }
+}

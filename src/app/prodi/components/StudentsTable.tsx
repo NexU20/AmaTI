@@ -1,9 +1,9 @@
-import Edit from "@/app/components/icons/Edit";
 import Table from "../Table/Table";
 import THead from "../Table/THead";
 import { getAllStudents } from "@/app/query";
 import DeleteButton from "./DeleteButton";
 import NavigateActionButton from "./NavigateActionButton";
+import EditMahasiswa from "./EditMahasiswa";
 
 export default async function StudentsTable() {
   const students = await getAllStudents();
@@ -75,9 +75,7 @@ export default async function StudentsTable() {
                   >
                     KHS
                   </NavigateActionButton>
-                  <button className="p-2 bg-blue-500 hover:bg-blue-600">
-                    <Edit />
-                  </button>
+                  <EditMahasiswa nim={student.nim} />
                   <DeleteButton nim={student.user_id} />
                 </td>
               </tr>

@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "init": "node init.js",
-    "prisma-migrate-dev": "docker exec amati_app npx prisma migrate dev --name init"
+    "prisma-migrate": "npx prisma migrate dev --name init"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
