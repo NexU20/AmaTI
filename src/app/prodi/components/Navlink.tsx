@@ -28,7 +28,11 @@ export default function Navlink({
       {type === "data" ? (
         <Data color={`${current === url ? "#000" : "#BEBEBE"}`} />
       ) : (
-        <Calendar color={`${current === url ? "#000" : "#BEBEBE"}`} />
+        <Calendar
+          color={`${current === url ? "#000" : "#BEBEBE"}`}
+          width={22}
+          height={22}
+        />
       )}
       {text}
     </Link>

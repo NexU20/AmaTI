@@ -5,7 +5,7 @@ import ProfileButton from "./components/ProfileButton";
 
 export default function layout({ children }: { children: ReactNode }) {
   return (
-    <div className="h-lvh bg-background grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
+    <div className="min-h-lvh bg-background grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
       <div
         id="header-sidebar"
         className="bg-sidebar-header py-4 pl-4 pr-10 flex min-h-24 items-center gap-x-2 select-none text-white"

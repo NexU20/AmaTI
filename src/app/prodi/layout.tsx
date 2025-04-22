@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import Image from "next/image";
 import ProfileButton from "./components/ProfileBtn";
 import Navigation from "./components/Navigation";
 
 export default function layout({ children }: { children: ReactNode }) {
   return (
-    <div className="h-lvh bg-background grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
+    <div className="min-h-lvh bg-background grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
       <div
         id="header-sidebar"
         className="bg-sidebar-header py-4 pl-4 pr-10 flex min-h-24 items-center gap-x-2 select-none text-white"
@@ -33,7 +33,19 @@ export default function layout({ children }: { children: ReactNode }) {
         <ProfileButton />
       </header>
       <Navigation />
-      <div className="px-8 py-4">{children}</div>
+      <div className="px-8 py-4">
+        <Suspense fallback={<LoadingComponent />}>{children}</Suspense>
+      </div>
+    </div>
+  );
+}
+
+function LoadingComponent() {
+  return (
+    <div className="h-full flex justify-center items-center">
+      <div className="animate-spin">
+        <Image src="/loading.png" width={50} height={50} alt="loading" />
+      </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import LogoutBtn from "@/app/components/LogoutBtn";
 import { verifyToken } from "@/app/utils";
 import { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";
@@ -15,10 +16,10 @@ export default async function ProfileButton() {
 
   return (
     <div className="relative">
-      <button className="text-slate-600 hover:bg-opacity-20 hover:bg-slate-400 poppins-regular px-6 py-2 rounded-full flex flex-col justify-start">
+      <LogoutBtn>
         <span className="text-left">{data.nama}</span>
         <span className="text-left text-xs">Mahasiswa</span>
-      </button>
+      </LogoutBtn>
     </div>
   );
 }

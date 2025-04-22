@@ -324,7 +324,7 @@ export async function getCalendar() {
       where: {
         jenis: { startsWith: "kalender_" },
       },
-      orderBy: { jenis: "asc" },
+      orderBy: { jenis: "desc" },
     });
 
     return data;
@@ -497,7 +497,8 @@ export async function updateData(
   ibu: string,
   telpAyah: string,
   telpIbu: string,
-  alamat: string
+  alamat: string,
+  emailWali: string
 ) {
   try {
     const data = await prisma.student.update({
@@ -507,6 +508,7 @@ export async function updateData(
         no_ayah: telpAyah,
         no_ibu: telpIbu,
         alamat,
+        email_wali: emailWali,
       },
       where: { nim: nim },
     });

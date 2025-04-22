@@ -49,6 +49,10 @@ export default async function PengaturanAkun() {
             <span>{data?.no_ibu || "-"}</span>
           </div>
           <div className="flex flex-col gap-y-2 min-h-16">
+            <span className="poppins-semibold">Email Wali</span>
+            <span>{data?.email_wali || "-"}</span>
+          </div>
+          <div className="flex flex-col gap-y-2 min-h-16">
             <span className="poppins-semibold">Alamat Rumah</span>
             <span>{data?.alamat || "-"}</span>
           </div>

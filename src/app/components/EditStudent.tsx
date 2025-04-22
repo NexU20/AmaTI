@@ -32,6 +32,7 @@ export default function EditStudent({
     const telpIbu = FormData.get("telp-ibu") as string;
 
     const alamat = FormData.get("alamat") as string;
+    const emailWali = FormData.get("email-wali") as string;
 
     const res = await updateData(
       datas.nim,
@@ -39,7 +40,8 @@ export default function EditStudent({
       ibu,
       telpAyah,
       telpIbu,
-      alamat
+      alamat,
+      emailWali
     );
 
     if (res.status !== 200) {
@@ -172,6 +174,23 @@ export default function EditStudent({
             />
           )}
         </div>
+        <div className="flex flex-col">
+          <label htmlFor="email-wali" className="w-fit">
+            Email Wali
+          </label>
+          {isLoading ? (
+            <LoadingState />
+          ) : (
+            <input
+              name="email-wali"
+              type="email"
+              required
+              className="input-box focus:border-sky-500"
+              id="email-wali"
+              defaultValue={datas?.email_wali || ""}
+            />
+          )}
+        </div>
         <button
           type="submit"
           className="bg-green-500 hover:bg-green-600 py-2 text-white font-semibold w-fit px-4 rounded-md self-end mt-2"
@@ -185,6 +204,6 @@ export default function EditStudent({
 
 function LoadingState() {
   return (
-    <div className="h-10 rounded-md min-w-60 bg-slate-500 bg-opacity-30 animate-pulse"></div>
+    <div className="h-10 rounded-md min-w-72 bg-slate-500 bg-opacity-30 animate-pulse"></div>
   );
 }

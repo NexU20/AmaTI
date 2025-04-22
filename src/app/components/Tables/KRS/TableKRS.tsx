@@ -1,7 +1,6 @@
 import { getKRS, getYear } from "@/app/query";
 import { getToken } from "@/app/actions";
 import { getCurrentSemester } from "@/app/utils";
-import Edit from "../../icons/Edit";
 import { getRole } from "@/app/helper";
 import SeeKhsBtn from "../SeeDocument";
 import DeleteFile from "../DeleteFile";
@@ -56,12 +55,6 @@ export default async function TableKRS({ nim }: { nim?: string }) {
                   >
                     <Eye />
                   </SeeKhsBtn>
-                  <button
-                    disabled={datas?.[`krs_sms${j + 1}`] ? false : true}
-                    className="mx-1 bg-sky-400 inline-flex justify-center items-center size-8 rounded-sm disabled:opacity-30"
-                  >
-                    <Edit />
-                  </button>
                   <DeleteFile
                     name={datas?.[`krs_sms${j + 1}`]?.file}
                     id={datas?.[`krs_sms${j + 1}`]?.dokumen_id}

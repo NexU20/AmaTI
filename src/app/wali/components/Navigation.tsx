@@ -19,7 +19,7 @@ export default function Navigation() {
   }, [pathName]);
 
   return (
-    <nav className="px-4 py-6 flex flex-col gap-y-4">
+    <nav className="px-4 py-6 flex flex-col gap-y-4 h-full max-h-svh sticky top-0">
       <Link
         href="/wali"
         onClick={() => setCurrent("/wali")}

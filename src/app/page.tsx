@@ -1,6 +1,6 @@
 import Image from "next/image";
-import LoginFooter from "./components/Login/LoginFooter";
-import LoginForm from "./components/Login/LoginForm";
+import LoginForm from "./components/UI/Login/LoginForm";
+import LoginFooter from "./components/UI/Login/LoginFooter";
 
 export default function page() {
   return (

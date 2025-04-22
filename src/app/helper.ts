@@ -2,6 +2,7 @@
 
 import fs from "fs/promises";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function saveFile(filename: string, data: Uint8Array) {
   await fs.writeFile(`./public/uploads/${filename}`, data);
@@ -22,4 +23,5 @@ export async function logout() {
   const cookie = await cookies();
   cookie.set("token", "", { expires: new Date(0) });
   cookie.set("role", "", { expires: new Date(0) });
+  redirect("/");
 }

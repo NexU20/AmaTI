@@ -6,6 +6,16 @@ import { redirect } from "next/navigation";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { AddStudent, findStudent, loginQuery } from "./query";
 
+type studentData = {
+  name: string;
+  nim: string;
+  angkatan: string;
+  password: string;
+  father: string;
+  mother: string;
+  ttl: string;
+};
+
 const prisma = new PrismaClient();
 
 async function setLoginCookie(role: string) {
@@ -61,31 +71,21 @@ export async function loginAction(data: FormData) {
   return res;
 }
 
-export async function addStudentAction(data: FormData) {
-  const input = {
-    name: data.get("name") as string,
-    nim: data.get("nim") as string,
-    angkatan: data.get("angkatan") as string,
-    password: data.get("password") as string,
-    father: data.get("father") as string,
-    mother: data.get("mother") as string,
-    ttl: data.get("ttl") as string,
-  };
-
-  const student = await findStudent(input.nim);
+export async function addStudentAction(data: studentData) {
+  const student = await findStudent(data.nim);
 
   if (student) {
     return false;
   }
 
   const res = await AddStudent(
-    input.name,
-    input.nim,
-    input.angkatan,
-    input.password,
-    input.father,
-    input.mother,
-    input.ttl
+    data.name,
+    data.nim,
+    data.angkatan,
+    data.password,
+    data.father,
+    data.mother,
+    data.ttl
   );
   revalidatePath("/dashboard");
 

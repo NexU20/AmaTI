@@ -1,7 +1,6 @@
 import { getKHS, getYear } from "@/app/query";
 import { getToken } from "@/app/actions";
 import { getCurrentSemester } from "@/app/utils";
-import Edit from "../../icons/Edit";
 import { getRole } from "@/app/helper";
 import KhsUploadBtn from "./KhsUploadBtn";
 import SeeKhsBtn from "../SeeDocument";
@@ -56,12 +55,6 @@ export default async function TableKHS({ nim }: { nim?: string }) {
                   >
                     <Eye />
                   </SeeKhsBtn>
-                  <button
-                    disabled={datas?.[`khs_sms${j + 1}`] ? false : true}
-                    className="mx-1 bg-sky-400 inline-flex justify-center items-center size-8 rounded-sm disabled:opacity-30"
-                  >
-                    <Edit />
-                  </button>
                   <DeleteFile
                     name={datas?.[`khs_sms${j + 1}`]?.file}
                     id={datas?.[`khs_sms${j + 1}`]?.dokumen_id}

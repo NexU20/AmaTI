@@ -2,12 +2,14 @@ import * as React from "react";
 
 export default function Calendar(props: React.SVGProps<SVGElement>) {
   const color = props.color || "#BEBEBE";
+  const width = props.width || 54;
+  const height = props.height || 54;
 
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
+      width={width}
+      height={height}
       fill="none"
       viewBox="0 0 22 22"
     >

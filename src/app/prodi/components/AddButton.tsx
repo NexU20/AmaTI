@@ -4,6 +4,7 @@ import ModalBackdrop from "@/app/components/ModalBackdrop";
 import { useModal, useOutsideClick } from "@/app/hooks";
 import { useRef } from "react";
 import TambahMahasiswa from "./TambahMahasiswa";
+import { YearBatchProvider } from "@/app/contexts/yearBatchContext";
 
 export default function AddButton() {
   const { isOpen, openModal, closeModal } = useModal();
@@ -14,7 +15,9 @@ export default function AddButton() {
     <>
       {isOpen && (
         <ModalBackdrop>
-          <TambahMahasiswa ref={modalRef} close={closeModal} />
+          <YearBatchProvider>
+            <TambahMahasiswa ref={modalRef} close={closeModal} />
+          </YearBatchProvider>
         </ModalBackdrop>
       )}
       <button

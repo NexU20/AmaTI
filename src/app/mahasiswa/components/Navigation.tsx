@@ -15,7 +15,7 @@ export default function Navigation() {
   }, [pathName]);
 
   return (
-    <div className="p-4 flex flex-col gap-y-4">
+    <nav className="p-4 flex flex-col gap-y-4 sticky top-0 h-full max-h-svh">
       <Link
         href={`/mahasiswa`}
         onClick={() => setCurrentTab("/mahasiswa")}
@@ -93,6 +93,6 @@ export default function Navigation() {
           </ul>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

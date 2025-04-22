@@ -4,10 +4,10 @@ import Link from "next/link";
 import LoginInput from "./LoginInput";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import ModalBackdrop from "../ModalBackdrop";
+import ModalBackdrop from "../../ModalBackdrop";
 import { useModal } from "@/app/hooks";
 import { loginAction, setUserLoginID } from "@/app/actions";
-import Loading from "../icons/Loading";
+import Loading from "../../icons/Loading";
 import { useToast } from "@/app/contexts/ToastContext";
 
 export default function LoginForm() {

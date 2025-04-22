@@ -1,4 +1,11 @@
 import { addStudentAction } from "@/app/actions";
+import HeadValue from "@/app/components/UI/OptionInput/HeadValue";
+import InputOption from "@/app/components/UI/OptionInput/InputOptions";
+import OptionSection from "@/app/components/UI/OptionInput/OptionSection";
+import Value from "@/app/components/UI/OptionInput/Value";
+import { useToast } from "@/app/contexts/ToastContext";
+import { useYearBatch } from "@/app/hooks/useYerBatch";
+import { getPossibleYearBatches } from "@/app/utils";
 
 export default function TambahMahasiswa({
   close,
@@ -7,12 +14,33 @@ export default function TambahMahasiswa({
   close: () => void;
   ref: React.RefObject<HTMLDivElement>;
 }) {
+  const { addToast } = useToast();
+  const { selectedBatch, setSelectedBatch } = useYearBatch();
+
   async function tambahMahasiswa(data: FormData) {
-    const res = await addStudentAction(data);
-    if (!res) {
-      alert("Gagal menambahkan mahasiswa");
+    if (!selectedBatch) {
+      addToast({ message: "Pilih angkatan terlebih dahulu", type: "error" });
       return;
     }
+
+    const input = {
+      name: data.get("name") as string,
+      nim: data.get("nim") as string,
+      angkatan: selectedBatch,
+      password: data.get("password") as string,
+      father: data.get("father") as string,
+      mother: data.get("mother") as string,
+      ttl: data.get("ttl") as string,
+    };
+
+    const res = await addStudentAction(input);
+    if (!res) {
+      addToast({ message: "Gagal menambahkan mahasiswa", type: "error" });
+      return;
+    }
+
+    addToast({ message: "Berhasil menambah Mahasiswa", type: "success" });
+    setSelectedBatch("");
   }
 
   return (
@@ -39,12 +67,14 @@ export default function TambahMahasiswa({
           name="nim"
           placeholder="NIM Mahasiswa"
         />
-        <input
-          className="border-2 px-4 py-2 outline-none focus:border-sky-500"
-          type="text"
-          name="angkatan"
-          placeholder="Angkatan"
-        />
+        <InputOption displayName="Angkatan">
+          <OptionSection>
+            <HeadValue text="Pilih Angkatan" />
+            {getPossibleYearBatches().map((batch) => (
+              <Value value={batch.split("/")[0]} key={batch.split("/")[0]} />
+            ))}
+          </OptionSection>
+        </InputOption>
         <input
           className="border-2 px-4 py-2 outline-none focus:border-sky-500"
           type="password"
@@ -80,7 +110,7 @@ export default function TambahMahasiswa({
             onClick={close}
             className="px-4 py-3 bg-black rounded-full poppins-semibold text-white"
           >
-            Keluar
+            Close
           </button>
         </div>
       </form>
